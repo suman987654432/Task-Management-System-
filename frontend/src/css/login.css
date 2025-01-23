@@ -1,0 +1,118 @@
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+
+.title {
+    text-align: center;
+    margin-top: -100px;
+    font-size: 3rem;
+    color: #333;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.title span {
+    color: #36bd00;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    height: 80vh;
+    margin: 0 auto;
+    margin-top: 20px;
+    gap: 100px;
+}
+
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.image-section img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.form-section {
+    flex: 1;
+    max-width: 500px;
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-section form .form-control {
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.form-section form .form-control:focus {
+    border-color: #007bff;
+}
+
+.form-section form .form-select {
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.form-section form .form-select:focus {
+    border-color: #007bff;
+}
+
+.login-button {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
