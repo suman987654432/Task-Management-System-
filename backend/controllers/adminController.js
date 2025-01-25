@@ -1,66 +1,70 @@
-const AdminModel = require("../models/adminModel")
+const AdminModel = require("../models/adminModel");
 const UserModel = require("../models/userModel");
-const transporter = require("../middleware/nodemailer")
-const RandomPassword = require("../middleware/randompass")
+const transporter = require("../middleware/nodemailer");
+const RandomPassword = require("../middleware/randompass");
+
+// Admin Login Handler
 const adminLogin = async (req, res) => {
-    const { userid, password } = req.body
+    const { userid, password } = req.body;
+
     try {
-        const Admin = await AdminModel.findOne({ userid: userid })
-        if (!Admin) {
-            res.status(400).json({ msg: "Invalid user Id" })
+        // Check if the admin exists
+        const admin = await AdminModel.findOne({ userid });
+        if (!admin) {
+            return res.status(400).json({ msg: "Invalid user ID" });
         }
-        if (Admin.password != password) {
 
-            res.status(400).json({ msg: "Invalid password" });
+        // Check if the password matches
+        if (admin.password !== password) {
+            return res.status(400).json({ msg: "Invalid password" });
         }
-        res.status(200).json(Admin)
+
+        // Return admin data if credentials are correct
+        res.status(200).json(admin);
     } catch (error) {
-        console.log(error)
+        console.error("Error during admin login:", error);
+        res.status(500).json({ msg: "An error occurred during login", error: error.message });
     }
-}
+};
 
+// Create New User Handler
 const createUser = async (req, res) => {
     const { username, designation, email } = req.body;
+
+    // Generate a random password
     const myPass = RandomPassword();
-    const mailoption = {
+
+    const mailOptions = {
         from: "sumanqaj9876@gmail.com",
         to: email,
-        subject: "Your company work detail Account",
-        text: `Dear ${username} chutiya   Your Account created with password : ${myPass} 
-    You can login using with your Email account   it is my order   your suman boss.
-   `
-    }
-
+        subject: "Your Company Work Details Account",
+        text: `Dear ${username},\n\nYour account has been created with the following password: ${myPass}\n\nYou can log in using your email account.\n\nBest regards,\nSuman (Your Boss)`,
+    };
 
     try {
-        const info = await transporter.sendMail(mailoption)
-        const EmpData = await UserModel.create({
-            username: username,
-            designation: designation,
-            email: email,
-            password: myPass
-        })
+        // Send email with the new account details
+        const emailInfo = await transporter.sendMail(mailOptions);
 
-        res.status(200).json({ success: true, message: "Email sent", info })
-        if (!username || !email || !password) {
-            return res.status(400).send({ msg: "All required fields must be filled!" });
-        }
+        // Create the user in the database
+        const newUser = await UserModel.create({
+            username,
+            designation,
+            email,
+            password: myPass, // Store the generated password
+        });
 
-        const User = await UserModel.create({ username, designation, email, password });
-
-        if (User) {
-            res.status(200).send({ msg: "new user created!" });
-        }
-        else {
-            res.status(500).send({ msg: "error in server!" })
+        if (newUser) {
+            res.status(200).json({ success: true, message: "User created and email sent successfully!", emailInfo });
+        } else {
+            res.status(500).json({ success: false, message: "Failed to create user in the database" });
         }
     } catch (error) {
-        console.error("Error creating user:", error);
-        res.status(500).send({ msg: "Failed to create user", error: error.message });
+        console.error("Error during user creation:", error);
+        res.status(500).json({ msg: "An error occurred while creating the user", error: error.message });
     }
 };
 
 module.exports = {
     adminLogin,
-    createUser
-}
+    createUser,
+};
