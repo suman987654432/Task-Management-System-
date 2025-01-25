@@ -26,9 +26,9 @@ const LoginPage = () => {
                     localStorage.setItem("username", response.data.username);
                     localStorage.setItem("userid", response.data.userid);
                     localStorage.setItem("userpassword", response.data.password);
-                   
+
                     message.success("Login successfully");
-                    navigate("/admin");
+                    navigate("/dashboard");
                 }
             } catch (error) {
                 message.error(error.response?.data?.msg || "An error occurred");

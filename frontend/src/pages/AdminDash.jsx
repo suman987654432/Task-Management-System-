@@ -44,8 +44,13 @@ const AdminDash = () => {
             </Link>
           </li>
           <li>
-            <Link to="/dashboard/insert">
-              <i className="fas fa-plus"></i> Insert Task
+            <Link to="/dashboard/asign">
+              <i className="fas fa-plus"></i> Assign Task
+            </Link>
+          </li>
+          <li>
+            <Link to="/dashboard/create">
+              <i className="fas fa-plus"></i> New User
             </Link>
           </li>
           <li>
