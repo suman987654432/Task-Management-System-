@@ -1,10 +1,33 @@
 import { Link, Outlet } from "react-router-dom";
 import "../css/dashboard.css";
 import user from "../images/image.png";
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const AdminDash = () => {
+  const [username, setUsername] = useState("");
+  const [userid, setUserid] = useState("");
+  const [showUserInfo, setShowUserInfo] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("username")) {
+      navigate("/");
+    } else {
+      setUsername(localStorage.getItem("username"));
+      setUserid(localStorage.getItem("userid"));
+    }
+  }, [navigate]);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/home");
+  };
+
+  const handleUserIconClick = () => {
+    setShowUserInfo(prevState => !prevState);
+  };
 
 
   return (
@@ -46,7 +69,7 @@ const AdminDash = () => {
             </Link>
           </li>
           <li>
-            <Link to="/" className="logout" >
+            <Link to="/" className="logout" onClick={logout}>
               <i className="fas fa-sign-out-alt"></i> Logout
             </Link>
           </li>
@@ -61,10 +84,16 @@ const AdminDash = () => {
           <div className="search-bar">
             <input type="text" placeholder="Search here..." />
           </div>
-          <div className="user-info" >
+          <div className="user-info" onClick={handleUserIconClick}>
             <img src={user} alt="User Icon" className="user-icon" />
           </div>
 
+          {showUserInfo && (
+            <div style={{ height: "100px", width: "200px", marginRight: "50px", marginTop: "20px" }} className="user-details ">
+              <p>Welcome: {username}</p>
+              <p>Email: {userid}</p>
+            </div>
+          )}
 
         </header>
         <main>

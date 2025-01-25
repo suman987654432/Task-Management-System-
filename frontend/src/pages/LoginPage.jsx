@@ -16,13 +16,17 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         if (usertype === "admin") {
             try {
                 let api = "http://localhost:8080/admin/adminlogin";
                 const response = await axios.post(api, { userid, password });
                 console.log(response.data);
                 if (response.status === 200) {
+                    localStorage.setItem("username", response.data.username);
+                    localStorage.setItem("userid", response.data.userid);
+                    localStorage.setItem("userpassword", response.data.password);
+                   
                     message.success("Login successfully");
                     navigate("/admin");
                 }
