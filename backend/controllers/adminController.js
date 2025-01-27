@@ -2,6 +2,7 @@ const AdminModel = require("../models/adminModel");
 const UserModel = require("../models/userModel");
 const transporter = require("../middleware/nodemailer");
 const RandomPassword = require("../middleware/randompass");
+const taskModel = require("../models/taskModel")
 
 // Admin Login Handler
 const adminLogin = async (req, res) => {
@@ -64,7 +65,43 @@ const createUser = async (req, res) => {
     }
 };
 
+const userDisplay = async (req, res) => {
+
+    try {
+        const User = await taskModel.find();
+        res.status(200).send(User)
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+
+
+const taskAssignSave = async (req, res) => {
+    const { empid, tasktitle, taskdescription, compdays } = req.body;
+
+    try {
+        const Employee = await TaskModel.create({
+            tasktitle: tasktitle,
+            taskdescription: taskdescription,
+            completiondays: compdays,
+            empid: empid
+        })
+
+        res.status(200).send("Task Succesfully Assigned!");
+    } catch (error) {
+        console.log(error);
+    }
+    console.log(req.body);
+    res.send("OKK");
+}
+
+
 module.exports = {
     adminLogin,
     createUser,
+    userDisplay,
+    taskAssignSave
 };
