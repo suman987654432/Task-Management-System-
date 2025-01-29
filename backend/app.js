@@ -4,6 +4,7 @@ app.use(express.json());
 const cors = require("cors");
 const mongoose = require("mongoose");
 const adminRoute = require("./routes/adminRoute");
+const empRoute = require("./routes/employeeRoutes")
 const bodyparser = require('body-parser');
 mongoose.connect("mongodb://127.0.0.1:27017/pm6task").then(() => {
     console.log("DB connected!");
@@ -14,7 +15,7 @@ app.use(bodyparser.json())
 
 
 app.use("/admin", adminRoute);
-
+app.use("/employee", empRoute)
 
 
 app.listen(8080, () => {
