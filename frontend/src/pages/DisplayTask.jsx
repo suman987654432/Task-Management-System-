@@ -1,48 +1,48 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+
 const DisplayTask = () => {
-  const [mydata, setMydata] = useState([]);
-  const [show, setShow] = useState(false);
-  const [input, setInput] = useState({});
-  const [empId, setEmpId] = useState("");
+  const [mydata, setMydata] = useState([]); // Stores employee data
+  const [show, setShow] = useState(false); // Controls modal visibility
+  const [input, setInput] = useState({}); // Stores form input values
+  const [empId, setEmpId] = useState(""); // Stores selected employee ID
+
   const handleClose = () => setShow(false);
   const handleShow = (empid) => {
     setEmpId(empid);
     setShow(true);
-  }
-  const handleInput = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    setInput(values => ({ ...values, [name]: value }));
-    console.log(input);
-  }
+  };
 
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setInput((values) => ({ ...values, [name]: value }));
+  };
 
   const handleSubmit = async () => {
-    let api = "http://localhost:8080/admin/assigntask";
-
+    const api = "http://localhost:8080/admin/assigntask";
     try {
       await axios.post(api, { empid: empId, ...input });
-      alert("task assign")
+      alert("Task assigned successfully");
+      handleClose();
     } catch (error) {
-      console.log(error);
+      console.error("Error assigning task:", error);
+      alert("Failed to assign task. Please try again.");
     }
-
-  }
+  };
 
   const loadData = async () => {
-    let api = "http://localhost:8080/admin/assigntaskdisplay";
+    const api = "http://localhost:8080/admin/assigntaskdisplay";
     try {
       const response = await axios.get(api);
       setMydata(response.data);
-      console.log(response.data);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching data:", error);
     }
-  }
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -52,12 +52,12 @@ const DisplayTask = () => {
     return (
       <>
         <tr>
-          <td> {key.empname} </td>
+          <td> {key.username} </td>
           <td> {key.designation} </td>
           <td> {key.email} </td>
           <td>
-
             <Button variant="success" onClick={() => { handleShow(key._id) }}>Assign Task</Button>
+
 
           </td>
         </tr>
@@ -65,54 +65,69 @@ const DisplayTask = () => {
     )
   })
 
-
   return (
     <>
-      <h1> Assign Task To User</h1>
+      <h1>Assign Task To User</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>Emp Name</th>
             <th>Designation</th>
             <th>Email</th>
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
+
         <tbody>
           {ans}
         </tbody>
       </Table>
 
-
+      Modal for assigning tasks
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Assign Task To Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Enter Task Title : <input type="text" name="tasktitle" value={input.tasktitle}
-            onChange={handleInput} />
+          <label>Task Title:</label>
+          <input
+            type="text"
+            name="tasktitle"
+            value={input.tasktitle || ""}
+            onChange={handleInput}
+            className="form-control"
+          />
           <br />
-          Enter Description :
+          <label>Task Description:</label>
+          <textarea
+            rows="4"
+            cols="50"
+            name="taskdescription"
+            value={input.taskdescription || ""}
+            onChange={handleInput}
+            className="form-control"
+          />
           <br />
-          <textarea rows="4" cols="50" name="taskdescription"
-            value={input.taskdescription}
-            onChange={handleInput} />
-
-          <br />
-
-          Enter Completion Days :
-          <br />
-          <input type="number" name="compdays" value={input.compdays}
-            onChange={handleInput} />
-
+          <label>Completion Days:</label>
+          <input
+            type="number"
+            name="compdays"
+            value={input.compdays || ""}
+            onChange={handleInput}
+            className="form-control"
+          />
         </Modal.Body>
         <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
           <Button variant="success" onClick={handleSubmit}>
-            Save!!!
+            Save
           </Button>
         </Modal.Footer>
       </Modal>
     </>
-  )
-}
+  );
+};
+
 export default DisplayTask;

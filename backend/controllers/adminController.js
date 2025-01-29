@@ -2,7 +2,8 @@ const AdminModel = require("../models/adminModel");
 const UserModel = require("../models/userModel");
 const transporter = require("../middleware/nodemailer");
 const RandomPassword = require("../middleware/randompass");
-const taskModel = require("../models/taskModel")
+const taskModel = require("../models/taskModel");
+const userModel = require("../models/userModel");
 
 // Admin Login Handler
 const adminLogin = async (req, res) => {
@@ -66,15 +67,14 @@ const createUser = async (req, res) => {
 };
 
 const userDisplay = async (req, res) => {
-
     try {
-        const User = await taskModel.find();
-        res.status(200).send(User)
+        const users = await userModel.find();
+        res.status(200).json(users);
     } catch (error) {
-        console.log(error)
+        console.error("Error fetching users:", error);
+        res.status(500).json({ msg: "Failed to fetch users" });
     }
-
-}
+};
 
 
 
@@ -83,20 +83,19 @@ const taskAssignSave = async (req, res) => {
     const { empid, tasktitle, taskdescription, compdays } = req.body;
 
     try {
-        const Employee = await TaskModel.create({
-            tasktitle: tasktitle,
-            taskdescription: taskdescription,
+        const task = await taskModel.create({
+            empid,
+            tasktitle,
+            taskdescription,
             completiondays: compdays,
-            empid: empid
-        })
+        });
 
-        res.status(200).send("Task Succesfully Assigned!");
+        res.status(200).json({ msg: "Task assigned successfully", task });
     } catch (error) {
-        console.log(error);
+        console.error("Error assigning task:", error);
+        res.status(500).json({ msg: "Failed to assign task" });
     }
-    console.log(req.body);
-    res.send("OKK");
-}
+};
 
 
 module.exports = {

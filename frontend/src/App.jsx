@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import AdminDash from './pages/AdminDash';
-import AssignTask from './pages/AssignTask';
+// import AssignTask from './pages/AssignTask';
 import CreateUser from './pages/CreateUser';
 import DisplayTask from './pages/DisplayTask';
 import SearchEmp from './pages/SearchEmp';
@@ -19,7 +19,7 @@ const App = () => {
 
           </Route>
           <Route path='dashboard' element={<AdminDash />} >
-            <Route path='asign' element={<AssignTask />} />
+            {/* <Route path='asign' element={<AssignTask />} /> */}
             <Route path='create' element={<CreateUser />} />
             <Route path='display' element={<DisplayTask />} />
             <Route path='search' element={<SearchEmp />} />
