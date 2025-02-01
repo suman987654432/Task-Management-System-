@@ -5,8 +5,9 @@ import AssignTask from './pages/AssignTask';
 import CreateUser from './pages/CreateUser';
 import DisplayUserTask from './pages/DisplayUserTask';
 import SearchEmp from './pages/SearchEmp';
-// import UpdateTask from "./pages/UpdateTask";
 import UserDashboard from "./pages/userDashboard";
+import UserReport from './pages/UserReport';
+import ForgotPassword from './pages/ForgotPassword';
 
 const App = () => {
   return (
@@ -22,13 +23,15 @@ const App = () => {
           <Route path='dashboard' element={<AdminDash />} >
             <Route path='asign' element={<AssignTask />} />
             <Route path='create' element={<CreateUser />} />
+            <Route path='userreport' element={<UserReport />} />
 
             <Route path='search' element={<SearchEmp />} />
             {/* <Route path='update' element={<UpdateTask />} /> */}
           </Route >
 
           <Route path="userdashboard" element={<UserDashboard />}>
-            <Route path='usertask' element={<DisplayUserTask />} />    
+            <Route path='usertask' element={<DisplayUserTask />} />
+            <Route path='forgotpass' element={<ForgotPassword />} />
           </Route >
 
         </Routes>

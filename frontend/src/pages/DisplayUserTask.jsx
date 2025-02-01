@@ -2,12 +2,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
-// import Button from "react-bootstrap/Button";
-// import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 const DisplayUserTask = () => {
     const empid = localStorage.getItem("empid");
     const [mydata, setMydata] = useState([]);
-
+    const [taskStatus, setTaskStatus] = useState("");
     const loadData = async () => {
         try {
             let api = "http://localhost:8080/employee/employeetaskdisplay";
@@ -20,6 +20,16 @@ const DisplayUserTask = () => {
     useEffect(() => {
         loadData()
     }, [])
+    const taskSubmit = async (taskid) => {
+        try {
+            let api = "http://localhost:8080/employee/employeetasksubmit";
+            const response = await axios.post(api, { taskid: taskid, taskstatus: taskStatus });
+            alert(response.data);
+            loadData();
+        } catch (error) {
+            console.log(error);
+        }
+    }
     let sno = 0;
     const ans = mydata.map((key) => {
         sno++;
@@ -31,15 +41,18 @@ const DisplayUserTask = () => {
                     <td> {key.tasktitle}</td>
                     <td> {key.taskdescription}</td>
                     <td> {key.completiondays}</td>
-                    {/* <td> */}
-                    {/* <Form.Select size="sm" name="taskStatus" value={taskStatus} onChange={(e) => { setTaskStatus(e.target.value) }}>
+                    <td>
+                        <Form.Select size="sm" name="taskStatus" value={taskStatus} onChange={(e) => { setTaskStatus(e.target.value) }}>
                             <option> Select Task</option>
                             <option value="Fully Completed">Fully Completed</option>
                             <option value="Partial Completed">Partial Completed</option>
                             <option value="No Completed">No Completed</option>
-                        </Form.Select> */}
+                        </Form.Select>
+                    </td>
+                    <td>
+                        {key.empreport == "submited" ? (<Button disabled>submitted</Button>) : (<Button onClick={() => { taskSubmit(key._id) }}>Send</Button>)}
 
-                    {/* </td> */}
+                    </td>
                 </tr>
             </>
         )

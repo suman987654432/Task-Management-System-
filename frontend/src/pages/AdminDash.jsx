@@ -53,19 +53,15 @@ const AdminDash = () => {
               <i className="fas fa-plus"></i> New User
             </Link>
           </li>
-          <li>
-            <Link to="/dashboard/display">
-              <i className="fas fa-table"></i> Display Task
-            </Link>
-          </li>
+
           <li>
             <Link to="/dashboard/search">
               <i className="fas fa-search"></i> Search Employee
             </Link>
           </li>
           <li>
-            <Link to="/dashboard/update">
-              <i className="fas fa-edit"></i> Update Task
+            <Link to="/dashboard/userreport">
+              <i className="fas fa-edit"></i> Show Report 
             </Link>
           </li>
           <li>

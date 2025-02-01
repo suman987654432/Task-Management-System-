@@ -1,9 +1,9 @@
 const AdminModel = require("../models/adminModel");
-const UserModel = require("../models/userModel");
+const userModel = require("../models/userModel");
 const transporter = require("../middleware/nodemailer");
 const RandomPassword = require("../middleware/randompass");
 const taskModel = require("../models/taskModel");
-const userModel = require("../models/userModel");
+
 
 // Admin Login Handler
 const adminLogin = async (req, res) => {
@@ -96,11 +96,32 @@ const taskAssignSave = async (req, res) => {
         res.status(500).json({ msg: "Failed to assign task" });
     }
 };
+const userReport = async (req, res) => {
+    try {
+        const Task = await taskModel.find().populate("empid");
+        res.status(200).send(Task);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
+
+const taskReAssign = async (req, res) => {
+    const { taskid } = req.body;
+    try {
+        const Data = await taskModel.findByIdAndUpdate(taskid, { empreport: 'pending' })
+        res.send({ msg: "Task succesfully Re Assigned!" });
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 module.exports = {
     adminLogin,
     createUser,
     userDisplay,
-    taskAssignSave
+    taskAssignSave,
+    userReport,
+    taskReAssign
 };

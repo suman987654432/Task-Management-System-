@@ -42,15 +42,16 @@ const UserDashboard = () => {
               <i className="fas fa-table"></i> Display Task
             </Link>
           </li>
-          <li>
-            <Link to="">
-              <i className="fas fa-search"></i> Search Employee
-            </Link>
-          </li>
+        
 
           <li>
             <Link to="">
               <i className="fas fa-address-book"></i> Contact
+            </Link>
+          </li>
+          <li>
+            <Link to="forgotpass">
+              <i className="fas fa-address-book"></i> Forgot Paasword
             </Link>
           </li>
           <li>

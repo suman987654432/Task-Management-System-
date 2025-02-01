@@ -1,5 +1,6 @@
 const EmpModel = require("../models/userModel")
 const TaskModel = require("../models/taskModel")
+
 const emploginCheck = async (req, res) => {
     const { userid, password } = req.body;
     try {
@@ -27,10 +28,28 @@ const empTaskDisplay = async (req, res) => {
     }
 }
 
+const empTaskSubmit = async (req, res) => {
+    const { taskid, taskstatus } = req.body;
+    try {
+        const Task = await TaskModel.findByIdAndUpdate(taskid, { taskstatus: taskstatus, empreport: "submited" });
+        res.status(200).send("Task Successfully submited!");
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+
+
+
+module.exports = { forgotPassword };
 
 
 
 module.exports = {
     emploginCheck,
-    empTaskDisplay
+    empTaskDisplay,
+    empTaskSubmit,
+
 }
