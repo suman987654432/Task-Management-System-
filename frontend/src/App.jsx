@@ -6,6 +6,7 @@ import CreateUser from './pages/CreateUser';
 import DisplayTask from './pages/DisplayTask';
 import SearchEmp from './pages/SearchEmp';
 import UpdateTask from "./pages/UpdateTask";
+import UserDashboard from "./pages/userDashboard";
 
 const App = () => {
   return (
@@ -26,7 +27,7 @@ const App = () => {
             <Route path='update' element={<UpdateTask />} />
           </Route >
 
-          <Route path="userdashboard" element={<userDashboard />}>
+          <Route path="userdashboard" element={<UserDashboard />}>
 
           </Route >
 
