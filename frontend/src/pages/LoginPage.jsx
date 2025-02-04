@@ -44,6 +44,7 @@ const LoginPage = () => {
                     if (response.status == 200) {
                         localStorage.setItem("empname", response.data.username)
                         localStorage.setItem("empemail", response.data.email)
+                        localStorage.setItem("emppassword", response.data.password)
                         localStorage.setItem("empid", response.data._id);
                         message.success("Login Succesfully!");
 

@@ -41,6 +41,24 @@ const empTaskSubmit = async (req, res) => {
 
 }
 
+const resetPassword = async (req, res) => {
+    const { email, newPassword } = req.body;
+
+    try {
+        let user = await EmpModel.findOne({ email });
+        if (!user) {
+            return res.status(400).send({ msg: "User not found!" });
+        }
+
+        user.password = newPassword; // Update password
+        await user.save();
+
+        res.status(200).send({ msg: "Password reset successful!" });
+    } catch (error) {
+        res.status(500).send({ msg: "Error resetting password" });
+    }
+};
+
 
 
 
@@ -51,5 +69,5 @@ module.exports = {
     emploginCheck,
     empTaskDisplay,
     empTaskSubmit,
-
+    resetPassword
 }

@@ -7,7 +7,7 @@ import DisplayUserTask from './pages/DisplayUserTask';
 import SearchEmp from './pages/SearchEmp';
 import UserDashboard from "./pages/userDashboard";
 import UserReport from './pages/UserReport';
-// import ForgotPassword from './pages/ForgotPassword';
+import ForgotPassword from './pages/ForgotPassword';
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
 
           <Route path="userdashboard" element={<UserDashboard />}>
             <Route path='usertask' element={<DisplayUserTask />} />
-            {/* <Route path='forgotpass' element={<ForgotPassword />} /> */}
+            <Route path='forgotpass' element={<ForgotPassword />} />
           </Route >
 
         </Routes>
