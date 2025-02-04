@@ -43,7 +43,7 @@ const empTaskSubmit = async (req, res) => {
 
 
 
-module.exports = { forgotPassword };
+
 
 
 
