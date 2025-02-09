@@ -1,118 +1,127 @@
 .logo {
-    max-width: 150px;
+    max-width: 120px;
     height: auto;
-}
-
-.title {
+    display: block;
+    margin: 0 auto 1rem;
+  }
+  
+  .title {
     text-align: center;
-    margin-top: -100px;
-    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
     color: #333;
     font-weight: bold;
     animation: fadeIn 0.5s ease-out;
-}
-
-.title span {
+  }
+  
+  .title span {
     color: #36bd00;
     font-style: italic;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.login-page {
+  }
+  
+  .login-page {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 1rem;
     position: relative;
     overflow: hidden;
-}
-
-.content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    height: 80vh;
-    margin: 0 auto;
-    margin-top: 20px;
-    gap: 100px;
-}
-
-.image-section {
-    flex: 1;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+  }
+  
+  .content-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-grow: 1;
+  }
+  
+  .form-section {
+    width: 100%;
+    max-width: 360px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
-}
-
-.image-section img {
-    max-width: 90%;
-    height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-}
-
-.form-section {
-    flex: 1;
-    max-width: 500px;
-    background: #f9f9f9;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-}
-
-.form-section form {
+  }
+  
+  .form-section form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-.form-section form .form-control {
-    font-size: 1.2rem;
-    padding: 10px;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
-
-.form-section form .form-control:focus {
+    gap: 1.25rem;
+  }
+  
+  .form-section form .form-label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+  .form-section form .form-control,
+  .form-section form .form-select {
+    font-size: 1rem;
+    padding: 0.625rem;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-section form .form-control:focus,
+  .form-section form .form-select:focus {
     border-color: #007bff;
-}
-
-.form-section form .form-select {
-    font-size: 1.2rem;
-    padding: 10px;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
-
-.form-section form .form-select:focus {
-    border-color: #007bff;
-}
-
-.login-button {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .login-button {
     width: 100%;
-    font-size: 1.2rem;
-    padding: 10px;
-    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.625rem;
+    border-radius: 4px;
     background-color: #007bff;
     color: #fff;
     border: none;
     transition: background-color 0.3s, transform 0.2s;
-}
-
-.login-button:hover {
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
     background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
+    transform: translateY(-1px);
+  }
+  
+  .login-button:active {
+    transform: translateY(1px);
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @media (min-width: 480px) {
+    .login-page {
+      padding: 2rem;
     }
-    100% {
-        opacity: 1;
+  
+    .form-section {
+      padding: 2.5rem;
     }
-}
+  }
+  
+  @media (min-width: 768px) {
+    .title {
+      font-size: 2.2rem;
+    }
+  
+    .form-section {
+      max-width: 400px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .title {
+      font-size: 2.5rem;
+    }
+  }

@@ -1,106 +1,57 @@
 import { Link, Outlet } from "react-router-dom";
-import "../css/dashboard.css";
-import user from "../images/image.png";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/dashboard.css";
+import user from "../images/image.png";
 
-
-const AdminDash = () => {
-  const [username, setUsername] = useState("");
-  const [userid, setUserid] = useState("");
+const UserDashboard = () => {
+  const [empName, setEmpName] = useState("");
+  const [empEmail, setEmpEmail] = useState("");
   const [showUserInfo, setShowUserInfo] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem("username")) {
-      navigate("/");
-    } else {
-      setUsername(localStorage.getItem("username"));
-      setUserid(localStorage.getItem("userid"));
-    }
-  }, [navigate]);
+    setEmpName(localStorage.getItem("empname"));
+    setEmpEmail(localStorage.getItem("empemail"));
+  }, []);
 
   const logout = () => {
     localStorage.clear();
-    navigate("/home");
+    navigate("/login");
   };
-
-  const handleUserIconClick = () => {
-    setShowUserInfo(prevState => !prevState);
-  };
-
 
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${sidebarOpen ? "sidebar-open" : ""}`}>
       {/* Sidebar */}
       <div className="sidebar">
+        <button className="menu-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
+          ☰
+        </button>
         <div className="sidebar-brand">
-          <h2>TASK 📝 MANAGEMENT</h2>
+          <h2>EMPLOYEE 📝 DASHBOARD</h2>
         </div>
         <ul className="sidebar-menu">
-          <li>
-            <Link to="/dashboard" className="active">
-              <i className="fas fa-home"></i> Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard/asign">
-              <i className="fas fa-plus"></i> Assign Task
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard/create">
-              <i className="fas fa-plus"></i> New User
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/dashboard/search">
-              <i className="fas fa-search"></i> Search Employee
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard/userreport">
-              <i className="fas fa-edit"></i> Show Report 
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard/contact">
-              <i className="fas fa-address-book"></i> Contact
-            </Link>
-          </li>
-          <li>
-            <Link to="/" className="logout" onClick={logout}>
-              <i className="fas fa-sign-out-alt"></i> Logout
-            </Link>
-          </li>
+          <li><Link to="/dashboard"><i className="fas fa-home"></i> Dashboard</Link></li>
+          <li><Link to="/dashboard/usertask"><i className="fas fa-tasks"></i> Display Task</Link></li>
+          <li><Link to="/dashboard/contact"><i className="fas fa-address-book"></i> Contact</Link></li>
+          <li><Link to="/dashboard/forgotpass"><i className="fas fa-key"></i> Forgot Password</Link></li>
+          <li><Link to="/" className="logout" onClick={logout}><i className="fas fa-sign-out-alt"></i> Logout</Link></li>
         </ul>
       </div>
 
       {/* Main Content */}
       <div className="main-content">
         <header>
-
-
-          <div className="search-bar">
-            <input type="text" placeholder="Search here..." />
-          </div>
-          <div className="user-info" onClick={handleUserIconClick}>
+          <button className="menu-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>☰</button>
+          <div className="search-bar"><input type="text" placeholder="Search here..." /></div>
+          <div className="user-info" onClick={() => setShowUserInfo(!showUserInfo)}>
             <img src={user} alt="User Icon" className="user-icon" />
           </div>
-
-          {showUserInfo && (
-            <div style={{ height: "100px", width: "200px", marginRight: "50px", marginTop: "20px" }} className="user-details ">
-              <p>Welcome: {username}</p>
-              <p>Email: {userid}</p>
-            </div>
-          )}
-
+          {showUserInfo && <div className="user-details"><p>Welcome: {empName}</p><p>Email: {empEmail}</p></div>}
         </header>
         <main>
           <h1>Welcome to the Dashboard</h1>
-
-          {/* <img className="suman" style={{ height: "80vh", width: "100%" }} src={image} alt="" /> */}
           <Outlet />
         </main>
       </div>
@@ -108,4 +59,4 @@ const AdminDash = () => {
   );
 };
 
-export default AdminDash;
+export default UserDashboard;

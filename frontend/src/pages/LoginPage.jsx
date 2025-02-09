@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import image from "../images/task.png";
+// import image from "../images/task.png";
 import logo from "../images/logo1.png";
 import "../css/login.css";
 import Footer from '../components/Footer';
@@ -67,9 +67,9 @@ const LoginPage = () => {
                 <img src={logo} alt="Task Management" className='logo' />
                 <h1 className="title"><span>Task Management System</span></h1>
                 <div className="content-wrapper">
-                    <div className="image-section">
-                        <img src={image} alt="Task Management" />
-                    </div>
+                    {/* <div className="image-section"> */}
+                        {/* <img src={image} alt="Task Management" />/ */}
+                    {/* </div> */}
                     <div className="form-section">
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">

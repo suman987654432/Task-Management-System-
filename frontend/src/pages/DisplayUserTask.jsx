@@ -1,9 +1,10 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
+// import "../css/responsive.css";
+
 const DisplayUserTask = () => {
     const empid = localStorage.getItem("empid");
     const [mydata, setMydata] = useState([]);
@@ -34,7 +35,6 @@ const DisplayUserTask = () => {
     const ans = mydata.map((key) => {
         sno++;
         return (
-
             <>
                 <tr>
                     <td>{sno}</td>
@@ -51,7 +51,6 @@ const DisplayUserTask = () => {
                     </td>
                     <td>
                         {key.empreport == "submited" ? (<Button disabled>submitted</Button>) : (<Button onClick={() => { taskSubmit(key._id) }}>Send</Button>)}
-
                     </td>
                 </tr>
             </>
@@ -59,25 +58,26 @@ const DisplayUserTask = () => {
     })
     return (
         <>
-            <h1>Your Task</h1>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>s.no</th>
-                        <th>Task Title</th>
-                        <th>Description</th>
-                        <th>Total Days</th>
-                        <th> Status</th>
-                        <th> Send Report</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ans}
-                </tbody>
-            </Table>
-
+            <h1 className="responsive-heading">Your Task</h1>
+            <div className="table-responsive">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>s.no</th>
+                            <th>Task Title</th>
+                            <th>Description</th>
+                            <th>Total Days</th>
+                            <th> Status</th>
+                            <th> Send Report</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {ans}
+                    </tbody>
+                </Table>
+            </div>
         </>
     )
 }
 
-export default DisplayUserTask
+export default DisplayUserTask;
