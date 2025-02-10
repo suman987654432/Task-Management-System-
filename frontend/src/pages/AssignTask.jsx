@@ -26,7 +26,7 @@ const AssignTask = () => {
     };
 
     const handleSubmit = async () => {
-        let api = "  https://task-management-system-4-ydf7.onrender.com/admin/assigntask";
+        let api = "  https://task-management-system-5-cg0y.onrender.com/admin/assigntask";
 
         try {
             await axios.post(api, { empid: empId, ...input });
@@ -38,7 +38,7 @@ const AssignTask = () => {
     };
 
     const loadData = async () => {
-        let api = "https://task-management-system-4-ydf7.onrender.com/admin/assigntaskdisplay";
+        let api = "https://task-management-system-5-cg0y.onrender.com/admin/assigntaskdisplay";
 
         try {
             const response = await axios.get(api);

@@ -19,7 +19,7 @@ const LoginPage = () => {
         e.preventDefault();
         if (usertype === "admin") {
             try {
-                let api = "https://task-management-system-4-ydf7.onrender.com/admin/adminlogin";
+                let api = "https://task-management-system-5-cg0y.onrender.com/admin/adminlogin";
                 const response = await axios.post(api, { userid, password });
                 console.log(response.data);
                 if (response.status === 200) {
@@ -38,7 +38,7 @@ const LoginPage = () => {
             if (usertype == "employee") {
                 try {
 
-                    let api = "https://task-management-system-4-ydf7.onrender.com/employee/employeelogin";
+                    let api = "https://task-management-system-5-cg0y.onrender.com/employee/employeelogin";
                     const response = await axios.post(api, { userid: userid, password: password });
                     console.log(response.data);
                     if (response.status == 200) {
