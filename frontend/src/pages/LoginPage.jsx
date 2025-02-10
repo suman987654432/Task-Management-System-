@@ -35,7 +35,7 @@ const LoginPage = () => {
         } else if (usertype === "employee") {
             try {
                 let api = "https://task-management-system-5-cg0y.onrender.com/employee/employeelogin";
-                const response = await axios.post(api, { userid: userid, password: password });     
+                const response = await axios.post(api, { userid: userid, password: password });
                 console.log(response.data);
                 if (response.status === 200) {
                     localStorage.setItem("empname", response.data.username);
