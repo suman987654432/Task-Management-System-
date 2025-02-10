@@ -6,8 +6,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
-const Port = process.env.PORT || 8080;
-const db = process.env.DB_URL;
+const PORT = process.env.PORT || 8080;
+const DB_URL = process.env.DB_URL;
 
 // Middleware
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(DB_URL)
     .then(() => console.log("DB connected!"))
     .catch(err => console.error("DB connection error:", err));
 
@@ -28,6 +28,6 @@ app.use("/admin", adminRoute);
 app.use("/employee", empRoute);
 
 // Start Server
-app.listen(Port, () => {
-    console.log(`Server running on port ${Port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
