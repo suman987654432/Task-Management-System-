@@ -18,7 +18,7 @@ const ForgotPassword = () => {
 
     try {
       // Backend API ko request bhejo password update ke liye
-      const response = await axios.post("http://localhost:8080/employee/reset-password", {
+      const response = await axios.post("https://task-management-system-4-ydf7.onrender.com/employee/reset-password", {
         email,
         newPassword
       });

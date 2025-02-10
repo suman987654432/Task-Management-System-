@@ -15,7 +15,7 @@ const SearchEmp = () => {
     }, []);
 
     const loadData = async () => {
-        let api = "http://localhost:8080/admin/assigntaskdisplay";
+        let api = "https://task-management-system-4-ydf7.onrender.com/admin/assigntaskdisplay";
         try {
             const response = await axios.get(api);
             setMydata(response.data);

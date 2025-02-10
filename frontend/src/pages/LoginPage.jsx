@@ -19,7 +19,7 @@ const LoginPage = () => {
         e.preventDefault();
         if (usertype === "admin") {
             try {
-                let api = "http://localhost:8080/admin/adminlogin";
+                let api = "https://task-management-system-4-ydf7.onrender.com/admin/adminlogin";
                 const response = await axios.post(api, { userid, password });
                 console.log(response.data);
                 if (response.status === 200) {
@@ -38,7 +38,7 @@ const LoginPage = () => {
             if (usertype == "employee") {
                 try {
 
-                    let api = "http://localhost:8080/employee/employeelogin";
+                    let api = "https://task-management-system-4-ydf7.onrender.com/employee/employeelogin";
                     const response = await axios.post(api, { userid: userid, password: password });
                     console.log(response.data);
                     if (response.status == 200) {
@@ -68,7 +68,7 @@ const LoginPage = () => {
                 <h1 className="title"><span>Task Management System</span></h1>
                 <div className="content-wrapper">
                     {/* <div className="image-section"> */}
-                        {/* <img src={image} alt="Task Management" />/ */}
+                    {/* <img src={image} alt="Task Management" />/ */}
                     {/* </div> */}
                     <div className="form-section">
                         <Form onSubmit={handleSubmit}>

@@ -21,7 +21,8 @@ const CreateUser = () => {
 
     // Handle form submission
     const handleSubmit = async () => {
-        const api = "http://localhost:8080/admin/createuser";
+        const api = "https://task-management-system-4-ydf7.onrender.com/admin/createuser";
+            
         try {
             const response = await axios.post(api, input);
             console.log(response.data);

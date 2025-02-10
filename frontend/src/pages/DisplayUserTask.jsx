@@ -11,7 +11,7 @@ const DisplayUserTask = () => {
     const [taskStatus, setTaskStatus] = useState("");
     const loadData = async () => {
         try {
-            let api = "http://localhost:8080/employee/employeetaskdisplay";
+            let api = "https://task-management-system-4-ydf7.onrender.com/employee/employeetaskdisplay";
             const response = await axios.post(api, { empid: empid })
             setMydata(response.data)
         } catch (error) {
@@ -23,7 +23,8 @@ const DisplayUserTask = () => {
     }, [])
     const taskSubmit = async (taskid) => {
         try {
-            let api = "http://localhost:8080/employee/employeetasksubmit";
+            let api = "https://task-management-system-4-ydf7.onrender.com/employee/employeetasksubmit";
+
             const response = await axios.post(api, { taskid: taskid, taskstatus: taskStatus });
             alert(response.data);
             loadData();
