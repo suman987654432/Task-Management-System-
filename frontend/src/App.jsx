@@ -5,7 +5,7 @@ import AssignTask from './pages/AssignTask';
 import CreateUser from './pages/CreateUser';
 import DisplayUserTask from './pages/DisplayUserTask';
 import SearchEmp from './pages/SearchEmp';
-import UserDashboard from "./pages/userDashboard";
+import UserDashboard from "./pages/UserDashboard";
 import UserReport from './pages/UserReport';
 import ForgotPassword from './pages/ForgotPassword';
 
@@ -24,7 +24,6 @@ const App = () => {
             <Route path='userreport' element={<UserReport />} />
 
             <Route path='search' element={<SearchEmp />} />
-            {/* <Route path='update' element={<UpdateTask />} /> */}
           </Route >
 
           <Route path="userdashboard" element={<UserDashboard />}>

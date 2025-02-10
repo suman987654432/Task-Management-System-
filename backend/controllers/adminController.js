@@ -28,10 +28,10 @@ const createUser = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ msg: "User with this email already exists" });
         }
-        
+
         // Generate a random password
         const password = RandomPassword();
-        
+
         // Send email with account details
         await transporter.sendMail({
             from: "sumanqaj9876@gmail.com",
@@ -39,7 +39,7 @@ const createUser = async (req, res) => {
             subject: "Your Company Work Details Account",
             text: `Dear ${username},\n\nYour account has been created with the following password: ${password}\n\nYou can log in using your email.\n\nBest regards,\nSuman (Your Boss)`
         });
-        
+
         // Create user in database
         const newUser = await UserModel.create({ username, designation, email, password });
         res.status(201).json({ success: true, message: "User created successfully" });
