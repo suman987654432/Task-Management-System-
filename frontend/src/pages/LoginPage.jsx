@@ -1,6 +1,5 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import image from "../images/task.png";
 import logo from "../images/logo1.png";
 import "../css/login.css";
 import Footer from '../components/Footer';
@@ -33,32 +32,26 @@ const LoginPage = () => {
             } catch (error) {
                 message.error(error.response?.data?.msg || "An error occurred");
             }
-        }
-        else
-            if (usertype == "employee") {
-                try {
+        } else if (usertype === "employee") {
+            try {
+                let api = "https://task-management-system-5-cg0y.onrender.com/employee/employeelogin";
+                const response = await axios.post(api, { userid: userid, password: password });     
+                console.log(response.data);
+                if (response.status === 200) {
+                    localStorage.setItem("empname", response.data.username);
+                    localStorage.setItem("empemail", response.data.email);
+                    localStorage.setItem("emppassword", response.data.password);
+                    localStorage.setItem("empid", response.data._id);
+                    message.success("Login Successfully!");
 
-                    let api = "https://task-management-system-5-cg0y.onrender.com/employee/employeelogin";
-                    const response = await axios.post(api, { userid: userid, password: password });
-                    console.log(response.data);
-                    if (response.status == 200) {
-                        localStorage.setItem("empname", response.data.username)
-                        localStorage.setItem("empemail", response.data.email)
-                        localStorage.setItem("emppassword", response.data.password)
-                        localStorage.setItem("empid", response.data._id);
-                        message.success("Login Succesfully!");
-
-                        navigate("/userdashboard")
-                    }
-
-                } catch (error) {
-                    message.error(error.response.data.msg);
+                    navigate("/userdashboard");
                 }
-
+            } catch (error) {
+                message.error(error.response?.data?.msg || "An error occurred");
             }
-            else {
-                message.warning("Please select a role");
-            }
+        } else {
+            message.warning("Please select a role");
+        }
     };
 
     return (
@@ -67,9 +60,6 @@ const LoginPage = () => {
                 <img src={logo} alt="Task Management" className='logo' />
                 <h1 className="title"><span>Task Management System</span></h1>
                 <div className="content-wrapper">
-                    {/* <div className="image-section"> */}
-                    {/* <img src={image} alt="Task Management" />/ */}
-                    {/* </div> */}
                     <div className="form-section">
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
