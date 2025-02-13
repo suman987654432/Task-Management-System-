@@ -7,7 +7,7 @@ import DisplayUserTask from './pages/DisplayUserTask';
 import SearchEmp from './pages/SearchEmp';
 import UserReport from './pages/UserReport';
 import ForgotPassword from './pages/ForgotPassword';
-import UserDashboard from './pages/UserDashboard';
+import UserDashboardPage from './pages/UserDashboard';
 
 const App = () => {
   return (
@@ -26,7 +26,7 @@ const App = () => {
             <Route path='search' element={<SearchEmp />} />
           </Route >
 
-          <Route path="userdashboard" element={<UserDashboard />}>
+          <Route path="userdashboard" element={<UserDashboardPage />}>
             <Route path='usertask' element={<DisplayUserTask />} />
             <Route path='forgotpass' element={<ForgotPassword />} />
           </Route >

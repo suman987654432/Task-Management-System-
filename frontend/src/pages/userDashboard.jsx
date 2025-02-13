@@ -3,7 +3,7 @@ import "../css/dashboard.css";
 import user from "../images/image.png";
 import { useState, useEffect } from "react";
 
-const UserDashboard = () => {
+const UserDashboardPage = () => {
   const navigate = useNavigate();
   const [empName, setEmpName] = useState("");
   const [empEmail, setEmpEmail] = useState("");
@@ -67,4 +67,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default UserDashboardPage;
