@@ -7,7 +7,7 @@ import DisplayUserTask from './pages/DisplayUserTask';
 import SearchEmp from './pages/SearchEmp';
 import UserReport from './pages/UserReport';
 import ForgotPassword from './pages/ForgotPassword';
-import UserDashboardPage from './pages/UserDashboard';
+import UserDashboardPage from './pages/UserDashboardPage';
 
 const App = () => {
   return (
