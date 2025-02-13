@@ -1,8 +1,7 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet,useNavigate } from "react-router-dom";
 import "../css/dashboard.css";
 import user from "../images/image.png";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
