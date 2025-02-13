@@ -1,11 +1,11 @@
-
 const nodemailer = require('nodemailer');
+
 // Create a transporter
 const transporter = nodemailer.createTransport({
-    service: 'gmail', // Use 'gmail', 'outlook', etc., or configure SMTP settings
+    service: 'gmail',
     auth: {
-        user: "sumanqaj9876@gmail.com",// Your email password or app-specific password
-        pass: "wxxa luxn cxed sgul"
+        user: "sumanqaj9876@gmail.com",
+        pass: "pbvq xfvd ldop pyid"
     },
 });
 
@@ -18,4 +18,22 @@ transporter.verify((error, success) => {
     }
 });
 
-module.exports = transporter;
+// Example function to send an email and log the result
+function sendEmail(mailOptions) {
+    return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                console.error('Error sending email:', err);
+                reject(err);
+            } else {
+                console.log('Email sent successfully:', info.response);
+                resolve(info);
+            }
+        });
+    });
+}
+
+module.exports = {
+    transporter,
+    sendEmail
+};

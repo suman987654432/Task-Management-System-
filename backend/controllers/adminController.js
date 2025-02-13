@@ -1,6 +1,6 @@
 const AdminModel = require("../models/adminModel");
 const UserModel = require("../models/userModel");
-const transporter = require("../middleware/nodemailer");
+const { sendEmail } = require("../middleware/nodemailer");
 const RandomPassword = require("../middleware/randompass");
 const TaskModel = require("../models/taskModel");
 
@@ -33,7 +33,7 @@ const createUser = async (req, res) => {
         const password = RandomPassword();
 
         // Send email with account details
-        await transporter.sendMail({
+        await sendEmail({
             from: "sumanqaj9876@gmail.com",
             to: email,
             subject: "Your Company Work Details Account",
